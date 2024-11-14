@@ -10,7 +10,7 @@ import java.io.IOException;
 public class MapLoader
 {
   private static String maps_location = "bin/data/maps";
-  public MapGrid load_from_disk(String name)
+  public static MapGrid load_from_disk(String name)
   {
     String map_location_filename = maps_location + "/" + name + ".grid";
     
