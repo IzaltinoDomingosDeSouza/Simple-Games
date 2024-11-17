@@ -66,18 +66,6 @@ public class GridQuest
     }
     public static void player_turn()
     {
-      int left_posx = player.get_posx() - 1;
-      int left_posy = player.get_posy();
-      
-      int right_posx = player.get_posx() + 1;
-      int right_posy = player.get_posy();
-      
-      int up_posx = player.get_posx();
-      int up_posy = player.get_posy() - 1;
-      
-      int down_posx = player.get_posx();
-      int down_posy = player.get_posy() + 1;
-      
       System.out.printf("You are at location (%d, %d)!\n", player.get_posx(), player.get_posy());
       
       System.out.printf("Here are the available directions you can move to : \n");
@@ -87,16 +75,16 @@ public class GridQuest
         switch(dir)
         {
           case Left:
-            System.out.printf("\t[L]eft  (%d,%d)\n", left_posx, left_posy);
+            System.out.printf("\t[L]eft  (%d,%d)\n", player.preview_pos_left().x, player.preview_pos_left().y);
           break;
           case Right:
-            System.out.printf("\t[R]ight (%d,%d)\n", right_posx, right_posy);
+            System.out.printf("\t[R]ight (%d,%d)\n", player.preview_pos_right().x, player.preview_pos_right().y);
           break;
           case Up:
-            System.out.printf("\t[U]p    (%d,%d)\n", up_posx, up_posy);
+            System.out.printf("\t[U]p    (%d,%d)\n", player.preview_pos_up().x, player.preview_pos_up().y);
           break;
           case Down:
-            System.out.printf("\t[D]own  (%d,%d)\n", down_posx, down_posy);
+            System.out.printf("\t[D]own  (%d,%d)\n", player.preview_pos_down().x, player.preview_pos_down().y);
           break;
         }
       }
@@ -107,25 +95,25 @@ public class GridQuest
         case Left:
           if(directions.contains(UserInputOption.Direction.Left))
           {
-            player.set_pos(left_posx,left_posy);
+            player.move_left();
           }
         break;
         case Right:
           if(directions.contains(UserInputOption.Direction.Right))
           {
-            player.set_pos(right_posx,right_posy);
+            player.move_right();
           }
         break;
         case Up:
           if(directions.contains(UserInputOption.Direction.Up))
           {
-            player.set_pos(up_posx,up_posy);
+            player.move_up();
           }
         break;
         case Down:
           if(directions.contains(UserInputOption.Direction.Down))
           {
-            player.set_pos(down_posx,down_posy);
+            player.move_down();
           }
         break;
       }
@@ -134,32 +122,25 @@ public class GridQuest
     }
     public static List<UserInputOption.Direction> player_available_directions()
     {
-      int left_posx = player.get_posx() - 1;
-      int left_posy = player.get_posy();
-      
-      int right_posx = player.get_posx() + 1;
-      int right_posy = player.get_posy();
-      
-      int up_posx = player.get_posx();
-      int up_posy = player.get_posy() - 1;
-      
-      int down_posx = player.get_posx();
-      int down_posy = player.get_posy() + 1;
+      var left = player.preview_pos_left();
+      var right = player.preview_pos_right();
+      var up = player.preview_pos_up();
+      var down = player.preview_pos_down();
       
       List<UserInputOption.Direction> directions = new ArrayList<>();
-      if((left_posx > 0 && left_posy > 0) && (left_posx < 8 && left_posy < 8))
+      if((left.x > 0 && left.y > 0) && (left.x < 8 && left.y < 8))
       {
         directions.add(UserInputOption.Direction.Left);
       }
-      if((right_posx > 0 && right_posy > 0) && (right_posx < 8 && right_posy < 8))
+      if((right.x > 0 && right.y > 0) && (right.x < 8 && right.y < 8))
       {
         directions.add(UserInputOption.Direction.Right);
       }
-      if((up_posx > 0 && up_posy > 0) && (up_posx < 8 && up_posy < 8))
+      if((up.x > 0 && up.y > 0) && (up.x < 8 && up.y < 8))
       {
         directions.add(UserInputOption.Direction.Up);
       }
-      if((down_posx > 0 && down_posy > 0) && (down_posx < 8 && down_posy < 8))
+      if((down.x > 0 && down.y > 0) && (down.x < 8 && down.y < 8))
       {
         directions.add(UserInputOption.Direction.Down);
       }
