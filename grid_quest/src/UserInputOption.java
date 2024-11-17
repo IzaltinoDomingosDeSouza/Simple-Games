@@ -2,23 +2,23 @@ package ids.izaltinodsouza.GridQuest;
 
 import java.util.Scanner;
 
-enum Direction
-{
-  Left,
-  Right,
-  Up,
-  Down,
-  Unknown
-};
-
-enum Confirmation
-{
-  Yes,
-  No
-};
-
 public class UserInputOption
 {
+  public enum Direction
+  {
+    Left,
+    Right,
+    Up,
+    Down,
+    Unknown
+  };
+
+  public enum Confirmation
+  {
+    Yes,
+    No
+  };
+
   private Scanner scanner;
   
   public UserInputOption()
