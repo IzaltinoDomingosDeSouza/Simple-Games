@@ -3,6 +3,7 @@ import ids.izaltinodsouza.GridQuest.MapLoader;
 import ids.izaltinodsouza.GridQuest.Player;
 import ids.izaltinodsouza.GridQuest.UserInputOption;
 import ids.izaltinodsouza.GridQuest.GameState;
+import ids.izaltinodsouza.GridQuest.GridElement;
 
 import java.util.Random;
 import java.util.List;
@@ -36,7 +37,37 @@ public class GridQuest
             player_turn();
           break;
         }
+        update();
+        System.out.printf("Life %d!\n",player.get_life());
       }
+    }
+    public static void update()
+    {
+      var element = map.get_element(player.get_posx(),player.get_posy());
+      switch(element)
+      {
+        case Exit:
+          System.out.printf("Congratulations, you've found your way out of the forest!\n");
+          gstate = GameState.TryAgain;
+        break;
+        case Fruits:
+          System.out.printf("At your location, you find a fruit that grants you an extra life!\n");
+          player.take_fruit();
+        break;
+        /*case Coins: NOT IMPLEMENTED YET
+          System.out.printf("At your location, you find a fruit that grants you a coin!\n");
+        break;*/
+        case Poisonous:
+          System.out.printf("At your location, you come across a poisonous plant and lose a life!\n");
+          player.take_poisonous();
+          if(!player.is_alive())
+          {
+            System.out.printf("Sorry, you have no more lives left! Game Over.\n");
+            gstate = GameState.GameOver;
+          }
+        break;
+      }
+     map.set_element(player.get_posx(),player.get_posy(),GridElement.Empty);
     }
     public static void new_game()
     {
@@ -96,29 +127,39 @@ public class GridQuest
           if(directions.contains(UserInputOption.Direction.Left))
           {
             player.move_left();
+          }else
+          {
+            gstate = GameState.PlayerTurn;
           }
         break;
         case Right:
           if(directions.contains(UserInputOption.Direction.Right))
           {
             player.move_right();
+          }else
+          {
+            gstate = GameState.PlayerTurn;
           }
         break;
         case Up:
           if(directions.contains(UserInputOption.Direction.Up))
           {
             player.move_up();
+          }else
+          {
+            gstate = GameState.PlayerTurn;
           }
         break;
         case Down:
           if(directions.contains(UserInputOption.Direction.Down))
           {
             player.move_down();
+          }else
+          {
+            gstate = GameState.PlayerTurn;
           }
         break;
       }
-      
-      gstate = GameState.GameOver;
     }
     public static List<UserInputOption.Direction> player_available_directions()
     {
