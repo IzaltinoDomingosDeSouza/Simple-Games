@@ -2,6 +2,7 @@ import ids.izaltinodsouza.GridQuest.MapGrid;
 import ids.izaltinodsouza.GridQuest.MapLoader;
 import ids.izaltinodsouza.GridQuest.Player;
 import ids.izaltinodsouza.GridQuest.UserInputOption;
+import ids.izaltinodsouza.GridQuest.GameState;
 
 import java.util.Random;
 
@@ -11,6 +12,7 @@ public class GridQuest
     private static MapGrid map = new MapGrid(8,8);
     private static Player player = new Player(0,0);
     private static UserInputOption input = new UserInputOption();
+    private static GameState gstate = GameState.NewGame;
     
     public static void main(String[] args)
     {
@@ -32,10 +34,10 @@ public class GridQuest
       switch(yes_or_no)
       {
         case Yes:
-          
+          gstate = GameState.NewGame;
         break;
         case No:
-          
+          gstate = GameState.GameOver;
         break;
       }
     }
