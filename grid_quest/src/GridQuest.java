@@ -17,7 +17,6 @@ public class GridQuest
     public static void main(String[] args)
     {
       boolean is_running = true;
-      gstate = GameState.TryAgain;
       while(is_running)
       {
         switch(gstate)
@@ -31,6 +30,9 @@ public class GridQuest
           case TryAgain:
             try_again();
           break;
+          case PlayerTurn:
+            player_turn();
+          break;
         }
       }
     }
@@ -38,6 +40,10 @@ public class GridQuest
     {
       map = MapLoader.load_from_disk("forest");
       player.set_pos(random.nextInt(map.x_size()), random.nextInt(map.y_size()));
+      
+      System.out.println("You are lost in a forest and need to find your way out!");
+      
+      gstate = GameState.PlayerTurn;
     }
     public static void try_again()
     {
@@ -55,6 +61,12 @@ public class GridQuest
           gstate = GameState.GameOver;
         break;
       }
+    }
+    public static void player_turn()
+    {
+      System.out.printf("You are at location (%d, %d)!\n", player.get_posx(), player.get_posy());
+      
+      gstate = GameState.GameOver;
     }
 }
 

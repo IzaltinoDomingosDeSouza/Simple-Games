@@ -5,4 +5,5 @@ public enum GameState
   NewGame,
   GameOver,
   TryAgain,
+  PlayerTurn,
 }
