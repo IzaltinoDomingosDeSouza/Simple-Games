@@ -16,8 +16,23 @@ public class GridQuest
     
     public static void main(String[] args)
     {
-      new_game();
-      try_again();
+      boolean is_running = true;
+      gstate = GameState.TryAgain;
+      while(is_running)
+      {
+        switch(gstate)
+        {
+          case NewGame:
+            new_game();
+          break;
+          case GameOver:
+            is_running = false;
+          break;
+          case TryAgain:
+            try_again();
+          break;
+        }
+      }
     }
     public static void new_game()
     {
