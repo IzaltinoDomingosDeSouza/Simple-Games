@@ -111,19 +111,19 @@ public class GridQuest
           }
         break;
         case Right:
-          if(directions.contains(UserInputOption.Direction.Left))
+          if(directions.contains(UserInputOption.Direction.Right))
           {
             player.set_pos(right_posx,right_posy);
           }
         break;
         case Up:
-          if(directions.contains(UserInputOption.Direction.Left))
+          if(directions.contains(UserInputOption.Direction.Up))
           {
             player.set_pos(up_posx,up_posy);
           }
         break;
         case Down:
-          if(directions.contains(UserInputOption.Direction.Left))
+          if(directions.contains(UserInputOption.Direction.Down))
           {
             player.set_pos(down_posx,down_posy);
           }
